@@ -159,6 +159,25 @@ augroup END
   nnoremap <Leader>v :vsplit <C-R>=expand("%:h") . "/" <CR>
 " }
 
+" Projectionist {
+if !exists('g:projectionist_heuristics')
+  let g:projectionist_heuristics = {}
+endif
+
+call extend(g:projectionist_heuristics, {
+      \ 'go.mod|*.go': {
+      \   '*.go': {
+      \     'alternate': '{}_test.go',
+      \     'type': 'source'
+      \   },
+      \   '*_test.go': {
+      \     'alternate': '{}.go',
+      \     'type': 'test'
+      \   },
+      \ }
+      \ })
+" }
+
 " Git {
 function! ToggleColors()
   if &diff | colorscheme base16-flat | else | colorscheme antiphoton | endif
